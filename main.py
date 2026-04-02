@@ -76,8 +76,23 @@ def call_llm(prompt):
 # DB FUNCTIONS
 # =========================
 
+# def get_connection():
+#     return psycopg2.connect(DB_URL)
+
 def get_connection():
-    return psycopg2.connect(DB_URL)
+    try:
+        conn = psycopg2.connect(
+            DB_URL,
+            sslmode="require",
+            connect_timeout=10
+        )
+        print("✅ DB CONNECTED")
+        return conn
+    except Exception as e:
+        import traceback
+        print("❌ FULL DB ERROR:")
+        traceback.print_exc()   # 🔥 THIS LINE IS KEY
+        return None
 
 
 def check_aadhaar(aadhaar):
