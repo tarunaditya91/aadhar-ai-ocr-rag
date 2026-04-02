@@ -19,7 +19,8 @@ load_dotenv()  # 🔥 MUST ADD
 # =========================
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-DB_URL = os.getenv("DB_URL")
+# DB_URL = os.getenv("DB_URL")
+DB_URL = os.getenv("DB_URL") or st.secrets["DB_URL"]
 
 reader = easyocr.Reader(['en'])
 client = Groq(api_key=GROQ_API_KEY)
