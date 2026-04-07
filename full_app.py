@@ -77,18 +77,46 @@ def get_connection():
         traceback.print_exc()   # 🔥 THIS LINE IS KEY
         return None
 
+# def check_aadhaar(aadhaar):
+#     conn = get_connection()
+#     cursor = conn.cursor()
+
+#     cursor.execute(
+#         "SELECT * FROM aadhar_data WHERE aadhaar = %s",
+#         (aadhaar,)
+#     )
+
+#     result = cursor.fetchone()
+#     conn.close()
+#     return result
+
 def check_aadhaar(aadhaar):
     conn = get_connection()
-    cursor = conn.cursor()
 
-    cursor.execute(
-        "SELECT * FROM aadhar_data WHERE aadhaar = %s",
-        (aadhaar,)
-    )
+    if conn is None:
+        print("❌ DB connection failed")
+        return None
 
-    result = cursor.fetchone()
-    conn.close()
-    return result
+    try:
+        cursor = conn.cursor()
+
+        cursor.execute(
+            "SELECT * FROM aadhar_data WHERE aadhaar = %s",
+            (aadhaar,)
+        )
+
+        result = cursor.fetchone()
+
+        cursor.close()
+        conn.close()
+
+        return result
+
+    except Exception as e:
+        print("❌ QUERY ERROR:", e)
+        if conn:
+            conn.close()
+        return None
 
 
 # =========================
