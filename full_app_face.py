@@ -200,7 +200,9 @@ def process_image(file_bytes):
     score, percent = calculate_match_score(db, data)
 
     # 🔥 FACE MATCH
-    face_match, face_msg = compare_faces(img_path, db[5])
+    # face_match, face_msg = compare_faces(img_path, db[5])
+    face_match = False
+    face_msg = "Face matching disabled in cloud"
 
     return {
         "status": "matched",
