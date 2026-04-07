@@ -2,8 +2,8 @@ streamlit
 easyocr
 numpy
 opencv-python-headless
-groq
 psycopg2-binary
 python-dotenv
-torch
-torchvision
+groq
+requests
+face-recognition
